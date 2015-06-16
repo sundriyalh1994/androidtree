@@ -1,6 +1,7 @@
 package com.example.himanshu.himdev;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,14 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity{ //implements View.OnClickListener can be used
+public class MainActivity extends ActionBarActivity { //implements View.OnClickListener can be used
 
-//declaring member var
+
+    //declaring member var
     private CrystalBall mCrystalBall = new CrystalBall();
     private TextView mAnswerlabel;
     private Button mGetAnswerButton;
     private ImageView mImage;
-
 
 
     @Override
@@ -27,11 +28,11 @@ public class MainActivity extends ActionBarActivity{ //implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       //assign to the member vars
-        mCrystalBall.mAnswers [0] ="ONE";   //use of member variable of object mCrystalBall
-        mAnswerlabel = (TextView)findViewById(R.id.textView1);
-        mGetAnswerButton = (Button)findViewById(R.id.button1);
-        mImage = (ImageView)findViewById(R.id.imageView);
+        //assign to the member vars
+        mCrystalBall.mAnswers[0] = "ONE";   //use of member variable of object mCrystalBall
+        mAnswerlabel = (TextView) findViewById(R.id.textView1);
+        mGetAnswerButton = (Button) findViewById(R.id.button1);
+        mImage = (ImageView) findViewById(R.id.imageView);
 
 
         mGetAnswerButton.setOnClickListener(new View.OnClickListener() {
@@ -43,30 +44,45 @@ public class MainActivity extends ActionBarActivity{ //implements View.OnClickLi
 
                 makeAnimation();
                 makeTextAnimation();
+                makesound();
             }
         });
     }
 
-    private void makeAnimation (){
+    private void makeAnimation() {
 
         mImage.setImageResource(R.drawable.ball_animation);
-        AnimationDrawable animationDrawable =(AnimationDrawable) mImage.getDrawable();
-        if(animationDrawable.isRunning())
-        {
+        AnimationDrawable animationDrawable = (AnimationDrawable) mImage.getDrawable();
+        if (animationDrawable.isRunning()) {
             animationDrawable.stop();
         }
         animationDrawable.start();
 
     }
+
     //twean animation ->alpha animation
-    private void makeTextAnimation(){
-        AlphaAnimation alphaAnimation  = new AlphaAnimation(0, 1);
+    private void makeTextAnimation() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
         alphaAnimation.setDuration(2000);
         alphaAnimation.setFillAfter(true);
         mAnswerlabel.setAnimation(alphaAnimation);
 
 
     }
+
+    //making sound using MediaPlayer
+    private void makesound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.cheerhooter01);  //static method
+
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
