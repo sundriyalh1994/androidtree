@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/ball01"
+        android:padding="0sp"
+        android:scaleType="fitCenter"
+        android:background="@drawable/ball01"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="enlighten me!!"
+        android:id="@+id/button1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center"
+        android:textColor="#ff322bff"
+        android:textSize="15sp"
+        android:textColorLink="#ffffa92d"
+        android:textColorHint="#ff89ff2e"
+        android:theme="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:visibility="visible"
+        android:textAppearance="@android:color/holo_red_dark"
+        android:shadowColor="#000000"
+        android:singleLine="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:elevation="10dp"
+        android:elegantTextHeight="true"
+        android:clickable="false"
+        android:backgroundTint="#ffedff76"
+        android:cursorVisible="true"
+        android:background="#ffffff"
+        android:freezesText="false"
+        android:textIsSelectable="true"
+        android:backgroundTintMode="multiply"
+        android:soundEffectsEnabled="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageView"
+        android:weightSum="1"
+        android:gravity="center_horizontal"
+        android:layout_centerVertical="true">
+        <view
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            class="android.support.v7.internal.widget.ViewStubCompat"
+            android:id="@+id/view"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.2 " />
+        <TextView
+            android:layout_width="0dp   "
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1"
+            android:layout_centerVertical="true"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:text=" "
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textColorHighlight="#ffffff"
+            android:shadowColor="#ffffff"
+            android:shadowRadius="100"
+            android:layout_centerHorizontal="true"
+            android:soundEffectsEnabled="true"
+            android:layout_weight=".6" />
+
+
+
+        <view
+            class="android.support.v7.internal.widget.ViewStubCompat"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:id="@+id/view2"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.2" />
+    </LinearLayout>
+
+</RelativeLayout>
