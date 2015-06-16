@@ -1,6 +1,10 @@
 package com.example.himanshu.himdev;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -19,11 +23,17 @@ public class MainActivity extends ActionBarActivity { //implements View.OnClickL
     //declaring member var
     private CrystalBall mCrystalBall = new CrystalBall();
     private TextView mAnswerlabel;
-    private Button mGetAnswerButton;
+    // private Button mGetAnswerButton;
     private ImageView mImage;
+    private SensorManager mSensorManager;
+    private Sensor mAcclerometer;
+   private ShakeDetector mShakeDetector;
+
+
 
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -31,22 +41,40 @@ public class MainActivity extends ActionBarActivity { //implements View.OnClickL
         //assign to the member vars
         mCrystalBall.mAnswers[0] = "ONE";   //use of member variable of object mCrystalBall
         mAnswerlabel = (TextView) findViewById(R.id.textView1);
-        mGetAnswerButton = (Button) findViewById(R.id.button1);
         mImage = (ImageView) findViewById(R.id.imageView);
+        //   mGetAnswerButton = (Button) findViewById(R.id.button1);
 
-
-        mGetAnswerButton.setOnClickListener(new View.OnClickListener() {
+        //getting shake property
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mAcclerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
             @Override
-            public void onClick(View v) {
-                String action = mCrystalBall.getAnAnswer();  //use of member function of McrystalBall object
-
-                mAnswerlabel.setText(action);
-
-                makeAnimation();
-                makeTextAnimation();
-                makesound();
+            public void onShake() {
+                callonshake();
             }
         });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mShakeDetector, mAcclerometer,
+                SensorManager.SENSOR_DELAY_UI);
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        mSensorManager.unregisterListener(mShakeDetector);
+
+    }
+
+    private void callonshake() {
+        String action = mCrystalBall.getAnAnswer();  //use of member function of McrystalBall object
+
+        mAnswerlabel.setText(action);
+
+        makeAnimation();
+        makeTextAnimation();
+        makesound();
     }
 
     private void makeAnimation() {
@@ -89,6 +117,7 @@ public class MainActivity extends ActionBarActivity { //implements View.OnClickL
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

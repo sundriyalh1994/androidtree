@@ -15,35 +15,6 @@
 
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="enlighten me!!"
-        android:id="@+id/button1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:textAlignment="center"
-        android:textColor="#ff322bff"
-        android:textSize="15sp"
-        android:textColorLink="#ffffa92d"
-        android:textColorHint="#ff89ff2e"
-        android:theme="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:visibility="visible"
-        android:textAppearance="@android:color/holo_red_dark"
-        android:shadowColor="#000000"
-        android:singleLine="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:elevation="10dp"
-        android:elegantTextHeight="true"
-        android:clickable="false"
-        android:backgroundTint="#ffedff76"
-        android:cursorVisible="true"
-        android:background="#ffffff"
-        android:freezesText="false"
-        android:textIsSelectable="true"
-        android:backgroundTintMode="multiply"
-        android:soundEffectsEnabled="true" />
 
     <LinearLayout
         android:orientation="horizontal"
