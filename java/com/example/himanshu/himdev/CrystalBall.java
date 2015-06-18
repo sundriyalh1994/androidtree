@@ -1,5 +1,7 @@
 package com.example.himanshu.himdev;
 
+import android.content.Context;
+
 import java.util.Random;
 
 /**
@@ -9,16 +11,18 @@ import java.util.Random;
 public class CrystalBall {
 
 //member variables
-  public String[] mAnswers ={"one","two","three","four","five"};
+  public static String[] mAnswers ={"one","two","three","four","five"};
+
 
 //member function
 
-            public String getAnAnswer()
+
+            public static String getAnAnswer()   //when we static a member function an object is not equired then;
     {
         String action = " ";
 
         // random values
-        Random random = new Random();
+        Random random = new Random();  //object intanciation
         int randomNumber;
         randomNumber = random.nextInt(mAnswers.length);
 

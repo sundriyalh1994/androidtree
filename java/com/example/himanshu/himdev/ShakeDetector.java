@@ -17,11 +17,11 @@ public class ShakeDetector implements SensorEventListener {
 	
     // Arrays to store gravity and linear acceleration values
 	private float[] mGravity = { 0.0f, 0.0f, 0.0f };
-	private float[] mLinearAcceleration = { 0.0f, 0.0f, 0.0f };
-	
 	// Indexes for x, y, and z values
 	private static final int X = 0;
-	private static final int Y = 1;
+
+    private float[] mLinearAcceleration = { 0.0f, 0.0f, 0.0f };
+    private static final int Y = 1;
 	private static final int Z = 2;
 
 	// OnShakeListener that will be notified when the shake is detected
@@ -34,7 +34,8 @@ public class ShakeDetector implements SensorEventListener {
 	int moveCount = 0;
     
 	// Constructor that sets the shake listener
-    public ShakeDetector(OnShakeListener shakeListener) {
+    public ShakeDetector(OnShakeListener shakeListener)
+    {
     	mShakeListener = shakeListener;
     }
 

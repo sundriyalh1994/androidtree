@@ -15,15 +15,17 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity { //implements View.OnClickListener can be used
 
 
     //declaring member var
-    private CrystalBall mCrystalBall = new CrystalBall();
+   // private CrystalBall mCrystalBall = new CrystalBall();
     private TextView mAnswerlabel;
-    // private Button mGetAnswerButton;
+
+     private Button mGetAnswerButton;
     private ImageView mImage;
     private SensorManager mSensorManager;
     private Sensor mAcclerometer;
@@ -39,13 +41,14 @@ public class MainActivity extends ActionBarActivity { //implements View.OnClickL
         setContentView(R.layout.activity_main);
 
         //assign to the member vars
-        mCrystalBall.mAnswers[0] = "ONE";   //use of member variable of object mCrystalBall
+       // mCrystalBall.mAnswers[0] = "ONE";   //use of member variable of object mCrystalBall
+        CrystalBall.mAnswers[0]="won";
         mAnswerlabel = (TextView) findViewById(R.id.textView1);
         mImage = (ImageView) findViewById(R.id.imageView);
         //   mGetAnswerButton = (Button) findViewById(R.id.button1);
 
         //getting shake property
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+      mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mAcclerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
             @Override
@@ -53,7 +56,16 @@ public class MainActivity extends ActionBarActivity { //implements View.OnClickL
                 callonshake();
             }
         });
-    }
+       //use of button insted of shake
+       mGetAnswerButton = (Button)findViewById(R.id.button);
+        mGetAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callonshake();
+            }
+        });
+        }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -68,7 +80,8 @@ public class MainActivity extends ActionBarActivity { //implements View.OnClickL
     }
 
     private void callonshake() {
-        String action = mCrystalBall.getAnAnswer();  //use of member function of McrystalBall object
+      //  String action = mCrystalBall.getAnAnswer();  //use of member function of McrystalBall object
+        String action = CrystalBall.getAnAnswer();
 
         mAnswerlabel.setText(action);
 
@@ -90,7 +103,8 @@ public class MainActivity extends ActionBarActivity { //implements View.OnClickL
 
     //twean animation ->alpha animation
     private void makeTextAnimation() {
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        AlphaAnimation alphaAnimation;
+        alphaAnimation = new AlphaAnimation(0, 1);
         alphaAnimation.setDuration(2000);
         alphaAnimation.setFillAfter(true);
         mAnswerlabel.setAnimation(alphaAnimation);
@@ -100,7 +114,11 @@ public class MainActivity extends ActionBarActivity { //implements View.OnClickL
 
     //making sound using MediaPlayer
     private void makesound() {
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.cheerhooter01);  //static method
+        MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.cheerhooter01);       //static method
+          //Toast toast = Toast.makeText(this,"hi",Toast.LENGTH_LONG);
+
+
+
 
         mediaPlayer.start();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
